@@ -30,6 +30,9 @@ function paintShows() {
     const liElement = document.createElement('li');
     liElement.classList.add('list--item', 'js-list--item');
     liElement.setAttribute('id', i);
+    if (favoriteShows.indexOf(parseInt(liElement.id)) !== -1) {
+      liElement.classList.add('favorite');
+    }
     results.appendChild(liElement);
     const imgElement = document.createElement('img');
     if (shows[i].image) {
@@ -40,6 +43,7 @@ function paintShows() {
         'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
       );
     }
+    imgElement.classList.add('img');
     liElement.appendChild(imgElement);
     const titleElement = document.createElement('h3');
     const titleContent = document.createTextNode(`${shows[i].name}`);
@@ -51,12 +55,13 @@ function paintShows() {
 function getFavorites(event) {
   const selectedShow = parseInt(event.currentTarget.id);
   const indFavorite = favoriteShows.indexOf(selectedShow);
-  console.log(indFavorite);
   if (indFavorite === -1) {
     favoriteShows.push(selectedShow);
   } else {
     favoriteShows.splice(indFavorite, 1);
   }
+  paintShows();
+  listenSearch();
 }
 
 function listenSearch() {
@@ -67,3 +72,4 @@ function listenSearch() {
 }
 
 button.addEventListener('click', handlerEvent);
+button.click();
