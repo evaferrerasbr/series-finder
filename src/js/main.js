@@ -6,9 +6,9 @@ let search = '';
 let shows = [];
 
 function handlerEvent() {
+  shows = [];
   search = document.querySelector('.js-input').value;
   searchShows();
-  paintShows();
 }
 
 function searchShows() {
@@ -18,11 +18,12 @@ function searchShows() {
       for (let i = 0; i < data.length; i++) {
         shows.push(data[i].show);
       }
+      paintShows();
     });
 }
 
-//me pinta los elementos bien la primera vez, pero el resto me añade los mismos elementos a la lista, no me cambia de búsqueda.
 function paintShows() {
+  results.innerHTML = '';
   for (let i = 0; i < shows.length; i++) {
     const liElement = document.createElement('li');
     results.appendChild(liElement);
