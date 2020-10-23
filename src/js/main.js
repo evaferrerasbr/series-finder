@@ -34,13 +34,11 @@ function paintShows() {
     const elementId = shows[i].id;
     liElement.setAttribute('id', elementId);
     liElement.classList.add('list--item', 'js-list--item');
-    // for (const fav of favoriteShows) {
-    //   if (parseInt(fav.id) === elementId) {
-    //     liElement.classList.add('list--item', 'js-list--item', 'favorite');
-    //   } else {
-    //     liElement.classList.add('list--item', 'js-list--item');
-    //   }
-    // }
+    for (const fav of favoriteShows) {
+      if (parseInt(fav.id) === elementId) {
+        liElement.classList.add('favorite');
+      }
+    }
     const imgElement = document.createElement('img');
     if (shows[i].image) {
       imgElement.setAttribute('src', shows[i].image.medium);
