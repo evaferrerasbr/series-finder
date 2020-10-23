@@ -13,7 +13,37 @@
   </head>
 
   <body>
-    <main></main>
+    <main>
+      <h1>Buscador de series</h1>
+      <form>
+        <label for="search">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="js-input"
+            value="dexter"
+          />
+        </label>
+        <input
+          type="button"
+          name="button"
+          id="button"
+          class="btn js-btn"
+          value="Search"
+        />
+      </form>
+      <section class="main--wrapper">
+        <article class="list--favorites">
+          <h2>Favoritas</h2>
+          <ul class="js-list--favorites"></ul>
+        </article>
+        <article class="list--results">
+          <h2>Resultados</h2>
+          <ul class="js-list--results"></ul>
+        </article>
+      </section>
+    </main>
 
     <script src="./assets/js/main.js"></script>
   </body>
