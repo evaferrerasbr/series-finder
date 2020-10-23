@@ -33,13 +33,14 @@ function paintShows() {
     const liElement = document.createElement('li');
     const elementId = shows[i].id;
     liElement.setAttribute('id', elementId);
-    for (const fav of favoriteShows) {
-      if (parseInt(fav.id) === elementId) {
-        liElement.classList.add('list--item', 'js-list--item', 'favorite');
-      } else {
-        liElement.classList.add('list--item', 'js-list--item');
-      }
-    }
+    liElement.classList.add('list--item', 'js-list--item');
+    // for (const fav of favoriteShows) {
+    //   if (parseInt(fav.id) === elementId) {
+    //     liElement.classList.add('list--item', 'js-list--item', 'favorite');
+    //   } else {
+    //     liElement.classList.add('list--item', 'js-list--item');
+    //   }
+    // }
     const imgElement = document.createElement('img');
     if (shows[i].image) {
       imgElement.setAttribute('src', shows[i].image.medium);
@@ -127,4 +128,4 @@ function getLocalStorage() {
 getLocalStorage();
 
 button.addEventListener('click', handlerEvent);
-button.click();
+// button.click();
