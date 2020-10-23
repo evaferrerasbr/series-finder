@@ -1,5 +1,10 @@
 body {
   height: 100vh;
+  color: #3d405b;
+}
+
+.main--wrapper {
+  display: flex;
 }
 
 .img {
@@ -8,5 +13,9 @@ body {
 
 .favorite {
   background-color: #bee3db;
-  color: #3d405b;
+  color: #6d597a;
+}
+
+.list--favorites {
+  width: 220px;
 }

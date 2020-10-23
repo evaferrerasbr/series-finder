@@ -1,7 +1,7 @@
 'use strict';
 
 const button = document.querySelector('.js-btn');
-const results = document.querySelector('.js-list');
+const results = document.querySelector('.js-list--results');
 let search = '';
 let shows = [];
 let favoriteShows = [];
