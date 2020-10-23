@@ -72,7 +72,6 @@ function paintFavorite() {
 
 function getFavorites(event) {
   const current = event.currentTarget;
-  current.classList.toggle('favorite');
   const imgCurrent = current.querySelector('.img');
   const titleCurrent = current.querySelector('h3');
   const objectFavorite = {
@@ -111,6 +110,13 @@ function setLocalStorage() {
 function getLocalStorage() {
   const localFavString = localStorage.getItem('favorites');
   savedFavorites = JSON.parse(localFavString);
+  if (savedFavorites !== null) {
+    favoriteShows = savedFavorites;
+    paintFavorite();
+    listenSearch();
+  } else {
+    handlerEvent();
+  }
 }
 
 getLocalStorage();
