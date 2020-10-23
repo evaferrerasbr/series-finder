@@ -7,7 +7,6 @@ let search = '';
 let shows = [];
 let favoriteShows = [];
 let favoriteId = [];
-let liElement;
 let savedFavorites = [];
 
 function handlerEvent() {
@@ -31,7 +30,7 @@ function searchShows() {
 function paintShows() {
   results.innerHTML = '';
   for (let i = 0; i < shows.length; i++) {
-    liElement = document.createElement('li');
+    const liElement = document.createElement('li');
     const elementId = shows[i].id;
     liElement.setAttribute('id', elementId);
     for (const fav of favoriteShows) {
