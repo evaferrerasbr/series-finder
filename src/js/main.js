@@ -9,6 +9,7 @@ let favoriteShows = [];
 let favoriteId = [];
 let liElement;
 let savedFavorites = [];
+let classFav = ''; //me falta saber si en DOM avanzado puedo meter una clase con una variable porque de momento no me deja, me da un error; otras cosas que puedo intentar son find, pero hasta ahora no lo he conseguido.
 
 function handlerEvent() {
   shows = [];
@@ -31,10 +32,9 @@ function searchShows() {
 function paintShows() {
   results.innerHTML = '';
   for (let i = 0; i < shows.length; i++) {
-    let classFav = 'notfavorite';
     liElement = document.createElement('li');
-    liElement.classList.add(classFav, 'list--item', 'js-list--item');
     liElement.setAttribute('id', shows[i].id);
+    liElement.classList.add('list--item', 'js-list--item');
     const imgElement = document.createElement('img');
     if (shows[i].image) {
       imgElement.setAttribute('src', shows[i].image.medium);
@@ -86,11 +86,13 @@ function getFavorites(event) {
   const indFavorite = favoriteId.indexOf(selectedShow);
   if (indFavorite === -1) {
     favoriteShows.push(objectFavorite);
+    classFav = 'favorite';
   } else {
     favoriteShows.splice(indFavorite, 1);
+    classFav = 'notfavorite';
   }
   paintFavorite();
-  // paintShows();
+  paintShows();
   listenSearch();
   setLocalStorage();
 }
