@@ -30,8 +30,9 @@ function searchShows() {
 function paintShows() {
   results.innerHTML = '';
   for (let i = 0; i < shows.length; i++) {
+    let classFav = 'notfavorite';
     liElement = document.createElement('li');
-    liElement.classList.add('list--item', 'js-list--item');
+    liElement.classList.add(classFav, 'list--item', 'js-list--item');
     liElement.setAttribute('id', shows[i].id);
     const imgElement = document.createElement('img');
     if (shows[i].image) {
@@ -50,46 +51,46 @@ function paintShows() {
     liElement.appendChild(titleElement);
     results.appendChild(liElement);
   }
-  paintFavorite();
 }
 
 function paintFavorite() {
+  favoriteList.innerHTML = '';
   for (let i = 0; i < favoriteShows.length; i++) {
-    favoriteList.innerHTML += `<li><img src="${favoriteShows[i].image}" class="img"/><h3>${favoriteShows[i].name}</h3></li>`;
-
-    // const liFav = document.createElement('li');
-    // const imgFav = document.createElement('img');
-    // imgFav.src = favoriteShows[i].image;
-    // imgFav.classList.add('img');
-    // liFav.appendChild(imgFav);
-    // const titleFav = document.createElement('h3');
-    // const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
-    // titleFav.appendChild(titleFavContent);
-    // liFav.appendChild(titleFav);
-    // favoriteList.appendChild(liFav);
+    const liFav = document.createElement('li');
+    const imgFav = document.createElement('img');
+    imgFav.src = favoriteShows[i].image;
+    imgFav.classList.add('img');
+    liFav.appendChild(imgFav);
+    const titleFav = document.createElement('h3');
+    const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
+    titleFav.appendChild(titleFavContent);
+    liFav.appendChild(titleFav);
+    favoriteList.appendChild(liFav);
   }
 }
 
 function getFavorites(event) {
   const current = event.currentTarget;
-  let imgCurrent = current.querySelector('.img');
-  let titleCurrent = current.querySelector('h3');
+  current.classList.toggle('favorite');
+  const imgCurrent = current.querySelector('.img');
+  const titleCurrent = current.querySelector('h3');
   const objectFavorite = {
     name: titleCurrent.innerHTML,
     image: imgCurrent.src,
     id: event.currentTarget.id,
   };
-  const selectedShow = parseInt(event.currentTarget.id);
+  const selectedShow = parseInt(current.id);
   favoriteId = favoriteShows.map(function (element) {
-    return parseInt(element.id);
-  }); //creamos un nuevo array a partir del array de favoritos que solo contenga los id para poder buscar en el indexOf
+    return parseInt(element.id); //creamos un nuevo array a partir del array de favoritos que solo contenga los id para poder buscar en el indexOf
+  });
   const indFavorite = favoriteId.indexOf(selectedShow);
   if (indFavorite === -1) {
     favoriteShows.push(objectFavorite);
   } else {
     favoriteShows.splice(indFavorite, 1);
   }
-  paintShows();
+  paintFavorite();
+  // paintShows();
   listenSearch();
 }
 
