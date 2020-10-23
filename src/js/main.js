@@ -8,6 +8,7 @@ let shows = [];
 let favoriteShows = [];
 let favoriteId = [];
 let liElement;
+let savedFavorites = [];
 
 function handlerEvent() {
   shows = [];
@@ -92,6 +93,7 @@ function getFavorites(event) {
   paintFavorite();
   // paintShows();
   listenSearch();
+  setLocalStorage();
 }
 
 function listenSearch() {
@@ -100,6 +102,18 @@ function listenSearch() {
     liItem.addEventListener('click', getFavorites);
   }
 }
+
+function setLocalStorage() {
+  const stringData = JSON.stringify(favoriteShows);
+  localStorage.setItem('favorites', stringData);
+}
+
+function getLocalStorage() {
+  const localFavString = localStorage.getItem('favorites');
+  savedFavorites = JSON.parse(localFavString);
+}
+
+getLocalStorage();
 
 button.addEventListener('click', handlerEvent);
 button.click();
