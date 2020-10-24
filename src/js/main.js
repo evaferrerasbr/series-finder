@@ -95,14 +95,34 @@ function paintFavorite() {
     const liFav = document.createElement('li');
     const imgFav = document.createElement('img');
     const titleFav = document.createElement('h3');
+    const buttonFav = document.createElement('button');
+    const buttonContent = document.createTextNode('X');
     const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
-    liFav.appendChild(imgFav);
-    titleFav.appendChild(titleFavContent);
-    liFav.appendChild(titleFav);
     favoriteList.appendChild(liFav);
+    liFav.appendChild(imgFav);
+    liFav.appendChild(buttonFav);
+    liFav.appendChild(titleFav);
+    buttonFav.appendChild(buttonContent);
+    titleFav.appendChild(titleFavContent);
+    liFav.classList.add('relative');
     imgFav.src = favoriteShows[i].image;
     imgFav.classList.add('img');
+    buttonFav.classList.add('btn--remove', 'js-remove');
+    buttonFav.addEventListener('click', removeFavorites);
+    buttonFav.setAttribute('data-id', favoriteShows[i].id);
   }
+}
+
+function removeFavorites(event) {
+  const dataId = parseInt(event.currentTarget.dataset.id);
+  for (let i = 0; i < favoriteShows.length; i++) {
+    if (dataId === parseInt(favoriteShows[i].id)) {
+      favoriteShows.splice([i], 1);
+    }
+  }
+  paintFavorite();
+  paintShows();
+  listenSearch();
 }
 
 function getFavorites(event) {

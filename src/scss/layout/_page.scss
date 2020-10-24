@@ -19,3 +19,19 @@ body {
 .list--favorites {
   width: 220px;
 }
+
+.relative {
+  position: relative;
+}
+
+.btn--remove {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  background-color: #dbcfcf;
+  position: absolute;
+  top: -10px;
+  left: 115px;
+}
