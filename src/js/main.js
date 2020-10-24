@@ -1,6 +1,7 @@
 'use strict';
 
 const button = document.querySelector('.js-btn');
+const resetButton = document.querySelector('.js-reset');
 const results = document.querySelector('.js-list--results');
 const favoriteList = document.querySelector('.js-list--favorites');
 let search = '';
@@ -12,19 +13,49 @@ let savedFavorites = [];
 function handlerEvent() {
   shows = [];
   search = document.querySelector('.js-input').value;
-  searchShows();
+  if (search !== '') {
+    searchShows();
+  } else {
+    showWarning();
+  }
+}
+
+function showWarning() {
+  results.innerHTML = '';
+  const paragraph = document.createElement('p');
+  const paragraphContent = document.createTextNode(
+    '¡Tienes que introducir tu búsqueda primero!'
+  );
+  paragraph.appendChild(paragraphContent);
+  paragraph.classList.add('paragraph--warning');
+  results.appendChild(paragraph);
 }
 
 function searchShows() {
   fetch(`//api.tvmaze.com/search/shows?q=${search}`)
     .then((response) => response.json())
     .then((data) => {
-      for (let i = 0; i < data.length; i++) {
-        shows.push(data[i].show);
+      if (data.length !== 0) {
+        for (let i = 0; i < data.length; i++) {
+          shows.push(data[i].show);
+        }
+        paintShows();
+        listenSearch();
+      } else {
+        notFound();
       }
-      paintShows();
-      listenSearch();
     });
+}
+
+function notFound() {
+  results.innerHTML = '';
+  const paragraph = document.createElement('p');
+  const paragraphContent = document.createTextNode(
+    'Lo sentimos, no hemos encontrado lo que buscas. ¡Prueba de nuevo!'
+  );
+  paragraph.appendChild(paragraphContent);
+  paragraph.classList.add('paragraph--notfound');
+  results.appendChild(paragraph);
 }
 
 function paintShows() {
@@ -63,14 +94,14 @@ function paintFavorite() {
   for (let i = 0; i < favoriteShows.length; i++) {
     const liFav = document.createElement('li');
     const imgFav = document.createElement('img');
-    imgFav.src = favoriteShows[i].image;
-    imgFav.classList.add('img');
-    liFav.appendChild(imgFav);
     const titleFav = document.createElement('h3');
     const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
+    liFav.appendChild(imgFav);
     titleFav.appendChild(titleFavContent);
     liFav.appendChild(titleFav);
     favoriteList.appendChild(liFav);
+    imgFav.src = favoriteShows[i].image;
+    imgFav.classList.add('img');
   }
 }
 
@@ -125,5 +156,14 @@ function getLocalStorage() {
 
 getLocalStorage();
 
+function resetFavorites() {
+  favoriteShows = [];
+  localStorage.removeItem('favorites');
+  paintFavorite();
+  paintShows();
+  listenSearch();
+}
+
 button.addEventListener('click', handlerEvent);
-// button.click();
+resetButton.addEventListener('click', resetFavorites);
+button.click();
