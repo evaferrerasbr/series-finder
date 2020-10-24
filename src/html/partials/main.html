@@ -1,13 +1,14 @@
 <main>
-  <h1>Buscador de series</h1>
+  <h1 class="title">Buscador de series</h1>
   <form>
     <label for="search">
       <input
         type="text"
         name="search"
         id="search"
-        class="js-input"
+        class="input js-input"
         value="dexter"
+        placeholder="Ej: The Wire"
       />
     </label>
     <input
@@ -19,14 +20,16 @@
     />
   </form>
   <section class="main--wrapper">
-    <article class="list--favorites">
-      <h2>Favoritas</h2>
-      <ul class="js-list--favorites"></ul>
-      <button class="js-reset" type="button">Reset</button>
+    <article>
+      <h2 class="subtitle">Favoritas</h2>
+      <ul class="list list--favorites js-list--favorites"></ul>
+      <button class="btn btn--favorite js-reset" type="button">
+        Borrar mis favoritas
+      </button>
     </article>
-    <article class="list--results">
-      <h2>Resultados</h2>
-      <ul class="js-list--results"></ul>
+    <article>
+      <h2 class="subtitle">Resultados</h2>
+      <ul class="list list--results js-list--results"></ul>
     </article>
   </section>
 </main>

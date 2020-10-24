@@ -1,19 +1,58 @@
 body {
   height: 100vh;
-  color: #3d405b;
+  color: #e8e8e8;
+  font-family: $font-main;
+  background-color: #625261;
+  padding: 25px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
 }
 
 .main--wrapper {
   display: flex;
 }
 
+.title {
+  font-size: 22px;
+}
+
+.subtitle {
+  font-size: 18px;
+}
+
+.title--show {
+  font-size: 14px;
+}
+
 .img {
-  height: 180px;
+  height: 150px;
+  border-radius: 10px;
 }
 
 .favorite {
-  background-color: #bee3db;
-  color: #6d597a;
+  background-color: #e8e8e8;
+  color: #625261;
+  width: 150px;
+  border-radius: 10px;
+}
+
+.list {
+  list-style: none;
+}
+
+.list--item {
+  width: 150px;
+  height: 200px;
+  cursor: pointer;
+}
+
+.list--results {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
 .list--favorites {
@@ -24,13 +63,35 @@ body {
   position: relative;
 }
 
+.input {
+  padding: 5px;
+  width: 200px;
+  height: 25px;
+  border-radius: 3px;
+  border: none;
+}
+
+.btn {
+  background-color: #89beb3;
+  color: #e8e8e8;
+  border: none;
+  width: 50px;
+  height: 25px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn--favorite {
+  width: 150px;
+}
+
 .btn--remove {
   width: 25px;
   height: 25px;
   border-radius: 25px;
   cursor: pointer;
   border: none;
-  background-color: #dbcfcf;
+  background-color: #89beb3;
   position: absolute;
   top: -10px;
   left: 115px;

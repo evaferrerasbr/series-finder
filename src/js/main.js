@@ -82,6 +82,7 @@ function paintShows() {
     imgElement.classList.add('img');
     liElement.appendChild(imgElement);
     const titleElement = document.createElement('h3');
+    titleElement.classList.add('title--show');
     const titleContent = document.createTextNode(`${shows[i].name}`);
     titleElement.appendChild(titleContent);
     liElement.appendChild(titleElement);
@@ -105,6 +106,7 @@ function paintFavorite() {
     buttonFav.appendChild(buttonContent);
     titleFav.appendChild(titleFavContent);
     liFav.classList.add('relative');
+    titleFav.classList.add('title--show');
     imgFav.src = favoriteShows[i].image;
     imgFav.classList.add('img');
     buttonFav.classList.add('btn--remove', 'js-remove');
