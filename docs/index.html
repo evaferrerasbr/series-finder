@@ -13,36 +13,48 @@
   </head>
 
   <body>
+    <header class="header">
+      <img
+        class="logo"
+        src="https://fontmeme.com/permalink/201025/3fd34f0a350f657416187eb7b175ab76.png"
+      />
+    </header>
+
     <main>
-      <h1>Buscador de series</h1>
-      <form>
-        <label for="search">
-          <input
-            type="text"
-            name="search"
-            id="search"
-            class="js-input"
-            value="dexter"
-          />
-        </label>
-        <input
-          type="button"
-          name="button"
-          id="button"
-          class="btn js-btn"
-          value="Search"
-        />
-      </form>
-      <section class="main--wrapper">
-        <article class="list--favorites">
-          <h2>Favoritas</h2>
-          <ul class="js-list--favorites"></ul>
-        </article>
-        <article class="list--results">
-          <h2>Resultados</h2>
-          <ul class="js-list--results"></ul>
-        </article>
-      </section>
+      <h1 class="title">Buscador de series</h1>
+      <div class="main--wrapper">
+        <div class="column--wrapper">
+          <form class="form">
+            <label for="search">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                class="input js-input"
+                value="dexter"
+                placeholder="Ej: The Wire"
+              />
+            </label>
+            <input
+              type="button"
+              name="button"
+              id="button"
+              class="btn js-btn"
+              value="Search"
+            />
+          </form>
+          <section>
+            <h2 class="subtitle">Mis series favoritas</h2>
+            <ul class="list list--favorites js-list--favorites"></ul>
+            <button class="btn btn--favorite js-reset" type="button">
+              Borrar mis favoritas
+            </button>
+          </section>
+        </div>
+        <section>
+          <ul class="list list--results js-list--results"></ul>
+        </section>
+      </div>
     </main>
 
     <script src="./assets/js/main.js"></script>
