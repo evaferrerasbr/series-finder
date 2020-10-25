@@ -105,10 +105,10 @@ function paintFavorite() {
     liFav.appendChild(titleFav);
     buttonFav.appendChild(buttonContent);
     titleFav.appendChild(titleFavContent);
-    liFav.classList.add('relative');
+    liFav.classList.add('li--fav');
     titleFav.classList.add('title--show');
     imgFav.src = favoriteShows[i].image;
-    imgFav.classList.add('img');
+    imgFav.classList.add('img--fav');
     buttonFav.classList.add('btn--remove', 'js-remove');
     buttonFav.addEventListener('click', removeFavorites);
     buttonFav.setAttribute('data-id', favoriteShows[i].id);

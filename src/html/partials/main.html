@@ -1,35 +1,36 @@
 <main>
   <h1 class="title">Buscador de series</h1>
-  <form>
-    <label for="search">
-      <input
-        type="text"
-        name="search"
-        id="search"
-        class="input js-input"
-        value="dexter"
-        placeholder="Ej: The Wire"
-      />
-    </label>
-    <input
-      type="button"
-      name="button"
-      id="button"
-      class="btn js-btn"
-      value="Search"
-    />
-  </form>
-  <section class="main--wrapper">
-    <article>
-      <h2 class="subtitle">Favoritas</h2>
-      <ul class="list list--favorites js-list--favorites"></ul>
-      <button class="btn btn--favorite js-reset" type="button">
-        Borrar mis favoritas
-      </button>
-    </article>
-    <article>
-      <h2 class="subtitle">Resultados</h2>
+  <div class="main--wrapper">
+    <div class="column--wrapper">
+      <form class="form">
+        <label for="search">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="input js-input"
+            value="dexter"
+            placeholder="Ej: The Wire"
+          />
+        </label>
+        <input
+          type="button"
+          name="button"
+          id="button"
+          class="btn js-btn"
+          value="Search"
+        />
+      </form>
+      <section>
+        <h2 class="subtitle">Mis series favoritas</h2>
+        <ul class="list list--favorites js-list--favorites"></ul>
+        <button class="btn btn--favorite js-reset" type="button">
+          Borrar mis favoritas
+        </button>
+      </section>
+    </div>
+    <section>
       <ul class="list list--results js-list--results"></ul>
-    </article>
-  </section>
+    </section>
+  </div>
 </main>

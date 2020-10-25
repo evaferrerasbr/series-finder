@@ -1,8 +1,8 @@
 body {
   height: 100vh;
-  color: #e8e8e8;
+  color: #495867;
   font-family: $font-main;
-  background-color: #625261;
+  background-color: #ffffff;
   padding: 25px;
 }
 
@@ -15,16 +15,28 @@ body {
   display: flex;
 }
 
+.column--wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
 .title {
   font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.form {
+  width: 300px;
 }
 
 .subtitle {
   font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .title--show {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .img {
@@ -32,10 +44,8 @@ body {
   border-radius: 10px;
 }
 
-.favorite {
-  background-color: #e8e8e8;
-  color: #625261;
-  width: 150px;
+.img--fav {
+  height: 100px;
   border-radius: 10px;
 }
 
@@ -44,55 +54,75 @@ body {
 }
 
 .list--item {
-  width: 150px;
-  height: 200px;
+  padding-top: 10px;
+  text-align: center;
+  margin: 0 10px 10px 5px;
+  width: 130px;
+  height: 188px;
   cursor: pointer;
+  background-color: white;
+  color: #495867;
+  border-radius: 10px;
+  border: 1px solid #495867;
+}
+
+.favorite {
+  background-color: #bdd5ea;
+  color: #577399;
+  border-radius: 10px;
 }
 
 .list--results {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
 }
 
 .list--favorites {
-  width: 220px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.relative {
+.li--fav {
   position: relative;
+  margin-bottom: 15px;
+  width: 80px;
+  margin: 0 10px 10px 5px;
 }
 
 .input {
   padding: 5px;
-  width: 200px;
-  height: 25px;
+  width: 190px;
+  height: 30px;
   border-radius: 3px;
-  border: none;
+  border: 1px solid #555b6e;
+  margin-bottom: 10px;
 }
 
 .btn {
-  background-color: #89beb3;
-  color: #e8e8e8;
+  background-color: #fe5f55;
+  color: white;
   border: none;
-  width: 50px;
-  height: 25px;
+  width: 70px;
+  height: 30px;
   border-radius: 3px;
   cursor: pointer;
 }
 
 .btn--favorite {
   width: 150px;
+  margin-top: 10px;
 }
 
 .btn--remove {
-  width: 25px;
-  height: 25px;
+  font-size: 8px;
+  width: 15px;
+  height: 15px;
   border-radius: 25px;
   cursor: pointer;
   border: none;
-  background-color: #89beb3;
+  background-color: black;
+  color: white;
   position: absolute;
-  top: -10px;
-  left: 115px;
+  top: -6px;
+  left: 65px;
 }
