@@ -1,0 +1,41 @@
+.list--favorites {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list--item--fav {
+  position: relative;
+  margin-bottom: 15px;
+  width: 80px;
+  margin: 0 10px 10px 5px;
+}
+
+.favorite {
+  background-color: $color-terciary;
+  color: $color-white;
+  border-radius: 10px;
+}
+
+.img--fav {
+  height: 100px;
+  border-radius: 10px;
+}
+
+.btn--favorite {
+  width: 150px;
+  margin-top: 10px;
+}
+
+.btn--delete {
+  font-size: 7px;
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  background-color: $color-primary;
+  color: $color-white;
+  position: absolute;
+  top: -6px;
+  left: 65px;
+}

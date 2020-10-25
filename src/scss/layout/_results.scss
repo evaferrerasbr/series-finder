@@ -1,0 +1,27 @@
+.list--results {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list--item {
+  padding-top: 20px;
+  margin: 0 10px 10px 5px;
+  width: 150px;
+  height: 220px;
+  text-align: center;
+  cursor: pointer;
+  background-color: $color-white;
+  color: $color-primary;
+  border-radius: 10px;
+  border: 1px solid $color-primary;
+}
+
+.title--show {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.img {
+  height: 150px;
+  border-radius: 10px;
+}

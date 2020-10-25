@@ -105,11 +105,11 @@ function paintFavorite() {
     liFav.appendChild(titleFav);
     buttonFav.appendChild(buttonContent);
     titleFav.appendChild(titleFavContent);
-    liFav.classList.add('li--fav');
+    liFav.classList.add('list--item--fav');
     titleFav.classList.add('title--show');
     imgFav.src = favoriteShows[i].image;
     imgFav.classList.add('img--fav');
-    buttonFav.classList.add('btn--remove', 'js-remove');
+    buttonFav.classList.add('btn--delete', 'js-remove');
     buttonFav.addEventListener('click', removeFavorites);
     buttonFav.setAttribute('data-id', favoriteShows[i].id);
   }
@@ -188,4 +188,3 @@ function resetFavorites() {
 
 button.addEventListener('click', handlerEvent);
 resetButton.addEventListener('click', resetFavorites);
-button.click();
