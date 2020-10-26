@@ -164,7 +164,7 @@ function paintFavorite() {
   setLocalStorage();
 }
 
-//when the user clicks the 'X' button the function searchs in the favorites array an id that matches with de data-id of the button and it removes that element of the array
+//searchs in the favorites array an id that matches with de data-id of the button and it removes that element of the array
 function removeFavorites(event) {
   for (let i = 0; i < favoriteShows.length; i++) {
     if (
