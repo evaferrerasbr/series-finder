@@ -1,9 +1,12 @@
 'use strict';
 
+//constantes con los elementos de html que tenemos que manipular en javascript
 const button = document.querySelector('.js-btn');
 const resetButton = document.querySelector('.js-reset');
 const results = document.querySelector('.js-list--results');
 const favoriteList = document.querySelector('.js-list--favorites');
+
+//variables globales a las que necesitamos acceder desde diferentes funciones
 let search = '';
 let shows = [];
 let favoriteShows = [];
