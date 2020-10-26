@@ -1,81 +1,93 @@
 'use strict';
 
-//constantes con los elementos de html que tenemos que manipular en javascript
+//constants with html elements
 const button = document.querySelector('.js-btn');
-const resetButton = document.querySelector('.js-reset');
-const results = document.querySelector('.js-list--results');
-const favoriteList = document.querySelector('.js-list--favorites');
+const buttonReset = document.querySelector('.js-reset');
+const resultsList = document.querySelector('.js-list--results');
+const favoritesList = document.querySelector('.js-list--favorites');
 
-//variables globales a las que necesitamos acceder desde diferentes funciones
+//global variables that are needed in different functions
 let search = '';
-let shows = [];
+let searchedShows = [];
 let favoriteShows = [];
-let favoriteId = [];
+let favoriteIdArray = [];
 let savedFavorites = [];
 
+//SEARCH
+//it starts when the user clicks the search button
 function handlerEvent() {
-  shows = [];
   search = document.querySelector('.js-input').value;
-  if (search !== '') {
-    searchShows();
+  searchedShows = [];
+  if (search === '') {
+    emptySearchMessage();
   } else {
-    showWarning();
+    searchShows();
   }
 }
 
-function showWarning() {
-  results.innerHTML = '';
+//shows a message when the user has clicked the search button without writting anything
+function emptySearchMessage() {
+  resultsList.innerHTML = '';
   const paragraph = document.createElement('p');
   const paragraphContent = document.createTextNode(
     '¡Tienes que introducir tu búsqueda primero!'
   );
+  resultsList.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
-  paragraph.classList.add('paragraph--warning');
-  results.appendChild(paragraph);
 }
 
+//makes a call to the server with the user's search and fills the searchedShows array with the response
 function searchShows() {
   fetch(`//api.tvmaze.com/search/shows?q=${search}`)
     .then((response) => response.json())
     .then((data) => {
-      if (data.length !== 0) {
+      if (data.length === 0) {
+        notFound();
+      } else {
         for (let i = 0; i < data.length; i++) {
-          shows.push(data[i].show);
+          searchedShows.push(data[i].show);
         }
         paintShows();
         listenSearch();
-      } else {
-        notFound();
       }
     });
 }
 
+//shows a message if the user has searched something that it's not in the server
 function notFound() {
-  results.innerHTML = '';
+  resultsList.innerHTML = '';
   const paragraph = document.createElement('p');
   const paragraphContent = document.createTextNode(
     'Lo sentimos, no hemos encontrado lo que buscas. ¡Prueba de nuevo!'
   );
+  resultsList.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
-  paragraph.classList.add('paragraph--notfound');
-  results.appendChild(paragraph);
 }
 
+//paints results in html with advanced DOM
 function paintShows() {
-  results.innerHTML = '';
-  for (let i = 0; i < shows.length; i++) {
+  resultsList.innerHTML = '';
+  for (let i = 0; i < searchedShows.length; i++) {
     const liElement = document.createElement('li');
-    const elementId = shows[i].id;
-    liElement.setAttribute('id', elementId);
+    const imgElement = document.createElement('img');
+    const titleElement = document.createElement('h3');
+    const titleContent = document.createTextNode(`${searchedShows[i].name}`);
+    resultsList.appendChild(liElement);
+    liElement.appendChild(imgElement);
+    liElement.appendChild(titleElement);
+    titleElement.appendChild(titleContent);
+    liElement.setAttribute('id', searchedShows[i].id);
     liElement.classList.add('list--item', 'js-list--item');
     for (const fav of favoriteShows) {
-      if (parseInt(fav.id) === elementId) {
+      if (parseInt(fav.id) === searchedShows[i].id) {
+        //adds a different class if the show has been added to the favorites array
         liElement.classList.add('favorite');
       }
     }
-    const imgElement = document.createElement('img');
-    if (shows[i].image) {
-      imgElement.setAttribute('src', shows[i].image.medium);
+    titleElement.classList.add('title--show');
+    if (searchedShows[i].image) {
+      //adds a default image if the show doesn't have any in the server
+      imgElement.setAttribute('src', searchedShows[i].image.medium);
     } else {
       imgElement.setAttribute(
         'src',
@@ -83,67 +95,35 @@ function paintShows() {
       );
     }
     imgElement.classList.add('img');
-    liElement.appendChild(imgElement);
-    const titleElement = document.createElement('h3');
-    titleElement.classList.add('title--show');
-    const titleContent = document.createTextNode(`${shows[i].name}`);
-    titleElement.appendChild(titleContent);
-    liElement.appendChild(titleElement);
-    results.appendChild(liElement);
   }
 }
 
-function paintFavorite() {
-  favoriteList.innerHTML = '';
-  for (let i = 0; i < favoriteShows.length; i++) {
-    const liFav = document.createElement('li');
-    const imgFav = document.createElement('img');
-    const titleFav = document.createElement('h3');
-    const buttonFav = document.createElement('button');
-    const buttonContent = document.createTextNode('X');
-    const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
-    favoriteList.appendChild(liFav);
-    liFav.appendChild(imgFav);
-    liFav.appendChild(buttonFav);
-    liFav.appendChild(titleFav);
-    buttonFav.appendChild(buttonContent);
-    titleFav.appendChild(titleFavContent);
-    liFav.classList.add('list--item--fav');
-    titleFav.classList.add('title--show');
-    imgFav.src = favoriteShows[i].image;
-    imgFav.classList.add('img--fav');
-    buttonFav.classList.add('btn--delete', 'js-remove');
-    buttonFav.addEventListener('click', removeFavorites);
-    buttonFav.setAttribute('data-id', favoriteShows[i].id);
+//takes from html the results elements and adds an event to each one
+function listenSearch() {
+  const liItems = document.querySelectorAll('.js-list--item');
+  for (const liItem of liItems) {
+    liItem.addEventListener('click', getFavorites);
   }
 }
 
-function removeFavorites(event) {
-  const dataId = parseInt(event.currentTarget.dataset.id);
-  for (let i = 0; i < favoriteShows.length; i++) {
-    if (dataId === parseInt(favoriteShows[i].id)) {
-      favoriteShows.splice([i], 1);
-    }
-  }
-  paintFavorite();
-  paintShows();
-  listenSearch();
-}
-
+//FAVORITES
+//checks if the clicked element it's in the favorites array to add it. If it's already in the array, it removes the element
 function getFavorites(event) {
   const current = event.currentTarget;
   const imgCurrent = current.querySelector('.img');
   const titleCurrent = current.querySelector('h3');
   const objectFavorite = {
+    //this object is filled with the info of the clicked element and it will be added or remove it from the favorites array
     name: titleCurrent.innerHTML,
     image: imgCurrent.src,
     id: event.currentTarget.id,
   };
-  const selectedShow = parseInt(current.id);
-  favoriteId = favoriteShows.map(function (element) {
-    return parseInt(element.id); //creamos un nuevo array a partir del array de favoritos que solo contenga los id para poder buscar en el indexOf
+  favoriteIdArray = favoriteShows.map(function (element) {
+    return parseInt(element.id);
+    //uses map method to get a new array with the ids of the favorites array in order to use indexOf
   });
-  const indFavorite = favoriteId.indexOf(selectedShow);
+  const selectedShow = parseInt(current.id);
+  const indFavorite = favoriteIdArray.indexOf(selectedShow);
   if (indFavorite === -1) {
     favoriteShows.push(objectFavorite);
   } else {
@@ -155,32 +135,73 @@ function getFavorites(event) {
   setLocalStorage();
 }
 
-function listenSearch() {
-  const liItems = document.querySelectorAll('.js-list--item');
-  for (const liItem of liItems) {
-    liItem.addEventListener('click', getFavorites);
+//paints a favorites list in html with the selected shows
+function paintFavorite() {
+  favoritesList.innerHTML = '';
+  for (let i = 0; i < favoriteShows.length; i++) {
+    const liFav = document.createElement('li');
+    const imgFav = document.createElement('img');
+    const titleFav = document.createElement('h3');
+    const buttonFav = document.createElement('button');
+    const buttonContent = document.createTextNode('X');
+    const titleFavContent = document.createTextNode(`${favoriteShows[i].name}`);
+    favoritesList.appendChild(liFav);
+    liFav.appendChild(imgFav);
+    liFav.appendChild(buttonFav);
+    liFav.appendChild(titleFav);
+    buttonFav.appendChild(buttonContent);
+    titleFav.appendChild(titleFavContent);
+    liFav.classList.add('list--item--fav');
+    titleFav.classList.add('title--show');
+    imgFav.src = favoriteShows[i].image;
+    imgFav.classList.add('img--fav');
+    buttonFav.classList.add('btn--delete', 'js-remove');
+    buttonFav.setAttribute('data-id', favoriteShows[i].id);
+    //sets a data-id in the button that matches with the id of each show
+    buttonFav.addEventListener('click', removeFavorites);
+    //sets an event in button to remove the favorite when the user clicks it
   }
+  setLocalStorage();
 }
 
+//when the user clicks the 'X' button the function searchs in the favorites array an id that matches with de data-id of the button and it removes that element of the array
+function removeFavorites(event) {
+  for (let i = 0; i < favoriteShows.length; i++) {
+    if (
+      parseInt(event.currentTarget.dataset.id) === parseInt(favoriteShows[i].id)
+    ) {
+      favoriteShows.splice([i], 1);
+    }
+  }
+  paintFavorite();
+  paintShows();
+  listenSearch();
+}
+
+//LOCAL STORAGE
+//saves the favorites array in local storage
 function setLocalStorage() {
-  const stringData = JSON.stringify(favoriteShows);
-  localStorage.setItem('favorites', stringData);
+  const setStringData = JSON.stringify(favoriteShows);
+  localStorage.setItem('favorites', setStringData);
 }
 
+//gets the info from local storage if it's not empty
 function getLocalStorage() {
-  const localFavString = localStorage.getItem('favorites');
-  savedFavorites = JSON.parse(localFavString);
-  if (savedFavorites !== null) {
+  const getStringData = localStorage.getItem('favorites');
+  savedFavorites = JSON.parse(getStringData);
+  if (savedFavorites === null) {
+    handlerEvent();
+  } else {
     favoriteShows = savedFavorites;
     paintFavorite();
     listenSearch();
-  } else {
-    handlerEvent();
   }
 }
 
 getLocalStorage();
 
+//RESET
+//removes the info from local storage and reset the favorites array
 function resetFavorites() {
   favoriteShows = [];
   localStorage.removeItem('favorites');
@@ -189,5 +210,6 @@ function resetFavorites() {
   listenSearch();
 }
 
+//EVENTS
 button.addEventListener('click', handlerEvent);
-resetButton.addEventListener('click', resetFavorites);
+buttonReset.addEventListener('click', resetFavorites);
