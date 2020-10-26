@@ -218,6 +218,7 @@ function getLocalStorage() {
     listenSearch();
   }
   if (favoriteShows.length === 0) {
+    favoritesList.innerHTML = '';
     notFavoritesYet();
   }
 }
