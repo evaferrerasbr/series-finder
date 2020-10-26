@@ -24,4 +24,6 @@ A continuación describimos los hitos marcados en el ejercicio y explicamos cóm
 
 - Mensaje por defecto para mostrar a la usuaria cuando su búsqueda no devuelve resultados del servidor.
 
+- Mensaje por defecto cuando el array de favoritos está vacío.
+
 - Maquetación. A pesar de no ser objeto de evaluación, hemos dado estilos a la aplicación para que la experiencia de la usuaria sea más agradable.

@@ -107,6 +107,18 @@ function listenSearch() {
 }
 
 //FAVORITES
+//shows a message when the favorites array is empty
+function notFavoritesYet() {
+  const paragraph = document.createElement('p');
+  const paragraphContent = document.createTextNode(
+    'Todavía no tienes ninguna serie favorita'
+  );
+  favoritesList.appendChild(paragraph);
+  paragraph.appendChild(paragraphContent);
+}
+
+notFavoritesYet();
+
 //checks if the clicked element it's in the favorites array to add it. If it's already in the array, it removes the element
 function getFavorites(event) {
   const current = event.currentTarget;
@@ -130,6 +142,9 @@ function getFavorites(event) {
     favoriteShows.splice(indFavorite, 1);
   }
   paintFavorite();
+  if (favoriteShows.length === 0) {
+    notFavoritesYet();
+  }
   paintShows();
   listenSearch();
   setLocalStorage();
@@ -164,7 +179,7 @@ function paintFavorite() {
   setLocalStorage();
 }
 
-//when the user clicks the 'X' button the function searchs in the favorites array an id that matches with de data-id of the button and it removes that element of the array
+//searchs in the favorites array an id that matches with de data-id of the button and it removes that element of the array
 function removeFavorites(event) {
   for (let i = 0; i < favoriteShows.length; i++) {
     if (
@@ -174,6 +189,9 @@ function removeFavorites(event) {
     }
   }
   paintFavorite();
+  if (favoriteShows.length === 0) {
+    notFavoritesYet();
+  }
   paintShows();
   listenSearch();
 }
@@ -196,6 +214,9 @@ function getLocalStorage() {
     paintFavorite();
     listenSearch();
   }
+  if (favoriteShows.length === 0) {
+    notFavoritesYet();
+  }
 }
 
 getLocalStorage();
@@ -206,6 +227,7 @@ function resetFavorites() {
   favoriteShows = [];
   localStorage.removeItem('favorites');
   paintFavorite();
+  notFavoritesYet();
   paintShows();
   listenSearch();
 }
