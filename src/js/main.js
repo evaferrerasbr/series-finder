@@ -211,7 +211,7 @@ function getLocalStorage() {
   const getStringData = localStorage.getItem('favorites');
   savedFavorites = JSON.parse(getStringData);
   if (savedFavorites === null) {
-    handlerEvent();
+    listenSearch();
   } else {
     favoriteShows = savedFavorites;
     paintFavorite();
