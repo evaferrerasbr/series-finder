@@ -6,6 +6,12 @@
   width: 70px;
   height: 30px;
   border-radius: 3px;
+  &:hover {
+    background-color: $color-terciary;
+  }
+  &:focus {
+    background-color: $color-terciary;
+  }
   cursor: pointer;
   &--favorite {
     width: 150px;
