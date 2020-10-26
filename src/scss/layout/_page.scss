@@ -27,12 +27,15 @@ body {
 }
 
 .input {
-  padding: 5px;
-  width: 190px;
+  padding-left: 10px;
+  width: 210px;
   height: 30px;
   border-radius: 3px;
   border: 1px solid $color-primary;
   margin-bottom: 10px;
+  &::placeholder {
+    font-family: $font-secondary;
+  }
 }
 
 .list {
@@ -41,10 +44,14 @@ body {
 
 .title {
   font-size: 22px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .subtitle {
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.message {
+  font-family: $font-secondary;
 }

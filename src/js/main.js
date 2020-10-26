@@ -34,6 +34,7 @@ function emptySearchMessage() {
   );
   resultsList.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
+  paragraph.classList.add('message');
 }
 
 //makes a call to the server with the user's search and fills the searchedShows array with the response
@@ -62,6 +63,7 @@ function notFound() {
   );
   resultsList.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
+  paragraph.classList.add('message');
 }
 
 //paints results in html with advanced DOM
@@ -115,6 +117,7 @@ function notFavoritesYet() {
   );
   favoritesList.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
+  paragraph.classList.add('message');
 }
 
 notFavoritesYet();
