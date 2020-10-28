@@ -1,11 +1,12 @@
 'use strict';
 
 //constants with html elements
-const button = document.querySelector('.js-btn');
-const buttonReset = document.querySelector('.js-reset');
+const resultsSection = document.querySelector('.js-section--results');
+const favoriteSection = document.querySelector('.js-section--favorites');
 const resultsList = document.querySelector('.js-list--results');
 const favoritesList = document.querySelector('.js-list--favorites');
-const resultsSection = document.querySelector('.js-section--results');
+const button = document.querySelector('.js-btn');
+const buttonReset = document.querySelector('.js-reset');
 
 //global variables that are needed in different functions
 let search = '';
@@ -29,11 +30,12 @@ function handlerEvent() {
 //shows a message when the user has clicked the search button without writting anything
 function emptySearchMessage() {
   resultsList.innerHTML = '';
+  resultsSection.innerHTML = '';
   const paragraph = document.createElement('p');
   const paragraphContent = document.createTextNode(
     '¡Tienes que introducir tu búsqueda primero!'
   );
-  resultsList.appendChild(paragraph);
+  resultsSection.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
   paragraph.classList.add('message');
 }
@@ -58,11 +60,12 @@ function searchShows() {
 //shows a message if the user has searched something that it's not in the server
 function notFound() {
   resultsList.innerHTML = '';
+  resultsSection.innerHTML = '';
   const paragraph = document.createElement('p');
   const paragraphContent = document.createTextNode(
     'Lo sentimos, no hemos encontrado lo que buscas. ¡Prueba de nuevo!'
   );
-  resultsList.appendChild(paragraph);
+  resultsSection.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
   paragraph.classList.add('message');
 }
@@ -71,28 +74,15 @@ function notFound() {
 function paintShows() {
   resultsList.innerHTML = '';
   resultsSection.innerHTML = '';
-  const totalElement = document.createElement('p');
-  const totalContent = document.createTextNode(
-    `Hay ${searchedShows.length} resultados`
-  );
-  totalElement.appendChild(totalContent);
-  resultsSection.appendChild(totalElement);
-  totalElement.addEventListener('click', getTotal);
   for (let i = 0; i < searchedShows.length; i++) {
     const liElement = document.createElement('li');
     const imgElement = document.createElement('img');
     const titleElement = document.createElement('h3');
     const titleContent = document.createTextNode(`${searchedShows[i].name}`);
-    const paragraphElement = document.createElement('p');
-    const paragraphContent = document.createTextNode(
-      `${searchedShows[i].premiered}`
-    );
     resultsList.appendChild(liElement);
     liElement.appendChild(imgElement);
     liElement.appendChild(titleElement);
     titleElement.appendChild(titleContent);
-    liElement.appendChild(paragraphElement);
-    paragraphElement.appendChild(paragraphContent);
     liElement.setAttribute('id', searchedShows[i].id);
     liElement.classList.add('list--item', 'js-list--item');
     for (const fav of favoriteShows) {
@@ -130,7 +120,7 @@ function notFavoritesYet() {
   const paragraphContent = document.createTextNode(
     'Todavía no tienes ninguna serie favorita'
   );
-  favoritesList.appendChild(paragraph);
+  favoriteSection.appendChild(paragraph);
   paragraph.appendChild(paragraphContent);
   paragraph.classList.add('message');
 }
@@ -171,6 +161,7 @@ function getFavorites(event) {
 //paints a favorites list in html with the selected shows
 function paintFavorite() {
   favoritesList.innerHTML = '';
+  favoriteSection.innerHTML = '';
   for (let i = 0; i < favoriteShows.length; i++) {
     const liFav = document.createElement('li');
     const imgFav = document.createElement('img');
