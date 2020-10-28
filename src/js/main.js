@@ -13,7 +13,6 @@ let searchedShows = [];
 let favoriteShows = [];
 let favoriteIdArray = [];
 let savedFavorites = [];
-const testArray = [2, 5, 9];
 
 //SEARCH
 //it starts when the user clicks the search button
@@ -255,20 +254,3 @@ function resetFavorites() {
 //EVENTS
 button.addEventListener('click', handlerEvent);
 buttonReset.addEventListener('click', resetFavorites);
-// document.querySelector('.js--total').addEventListener('click', getTotal);
-
-//TESTS
-
-function getTotal() {
-  for (let i = 0; i < testArray.length; i++) {
-    if (searchedShows.length < testArray[i]) {
-      console.log(
-        `El número de resultados es ${searchedShows.length} y es menor que ${testArray[i]}`
-      );
-    } else {
-      console.log(
-        `El número de resultados es ${searchedShows.length} y es mayor que ${testArray[i]}`
-      );
-    }
-  }
-}
