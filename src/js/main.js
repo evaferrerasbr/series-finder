@@ -5,6 +5,7 @@ const button = document.querySelector('.js-btn');
 const buttonReset = document.querySelector('.js-reset');
 const resultsList = document.querySelector('.js-list--results');
 const favoritesList = document.querySelector('.js-list--favorites');
+const resultsSection = document.querySelector('.js-section--results');
 
 //global variables that are needed in different functions
 let search = '';
@@ -12,6 +13,7 @@ let searchedShows = [];
 let favoriteShows = [];
 let favoriteIdArray = [];
 let savedFavorites = [];
+const testArray = [2, 5, 9];
 
 //SEARCH
 //it starts when the user clicks the search button
@@ -69,15 +71,29 @@ function notFound() {
 //paints results in html with advanced DOM
 function paintShows() {
   resultsList.innerHTML = '';
+  resultsSection.innerHTML = '';
+  const totalElement = document.createElement('p');
+  const totalContent = document.createTextNode(
+    `Hay ${searchedShows.length} resultados`
+  );
+  totalElement.appendChild(totalContent);
+  resultsSection.appendChild(totalElement);
+  totalElement.addEventListener('click', getTotal);
   for (let i = 0; i < searchedShows.length; i++) {
     const liElement = document.createElement('li');
     const imgElement = document.createElement('img');
     const titleElement = document.createElement('h3');
     const titleContent = document.createTextNode(`${searchedShows[i].name}`);
+    const paragraphElement = document.createElement('p');
+    const paragraphContent = document.createTextNode(
+      `${searchedShows[i].premiered}`
+    );
     resultsList.appendChild(liElement);
     liElement.appendChild(imgElement);
     liElement.appendChild(titleElement);
     titleElement.appendChild(titleContent);
+    liElement.appendChild(paragraphElement);
+    paragraphElement.appendChild(paragraphContent);
     liElement.setAttribute('id', searchedShows[i].id);
     liElement.classList.add('list--item', 'js-list--item');
     for (const fav of favoriteShows) {
@@ -239,3 +255,20 @@ function resetFavorites() {
 //EVENTS
 button.addEventListener('click', handlerEvent);
 buttonReset.addEventListener('click', resetFavorites);
+// document.querySelector('.js--total').addEventListener('click', getTotal);
+
+//TESTS
+
+function getTotal() {
+  for (let i = 0; i < testArray.length; i++) {
+    if (searchedShows.length < testArray[i]) {
+      console.log(
+        `El número de resultados es ${searchedShows.length} y es menor que ${testArray[i]}`
+      );
+    } else {
+      console.log(
+        `El número de resultados es ${searchedShows.length} y es mayor que ${testArray[i]}`
+      );
+    }
+  }
+}
