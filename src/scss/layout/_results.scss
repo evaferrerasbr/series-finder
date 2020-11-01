@@ -4,16 +4,14 @@
 }
 
 .list--item {
-  padding-top: 20px;
-  margin: 0 10px 10px 5px;
-  width: 160px;
-  height: 240px;
+  // padding-top: 20px;
+  margin: 0 15px 15px 0;
+  width: 130px;
+  height: 260px;
   text-align: center;
   cursor: pointer;
-  background-color: $color-white;
+  // background-color: $color-white;
   color: $color-primary;
-  border-radius: 10px;
-  border: 1px solid $color-primary;
 }
 
 .title--show {
@@ -22,6 +20,6 @@
 }
 
 .img {
-  height: 150px;
+  height: 170px;
   border-radius: 10px;
 }

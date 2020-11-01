@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-  padding: 25px;
+  padding: 40px;
   color: $color-primary;
   font-family: $font-main;
   background-color: $color-white;
@@ -13,16 +13,23 @@ body {
 
 .main--wrapper {
   display: flex;
+  flex-direction: column;
+  @include tablet {
+    flex-direction: row;
+  }
 }
 
 .column--wrapper {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
+  @include tablet {
+    width: 320px;
+  }
 }
 
 .form {
-  width: 300px;
+  width: 320px;
   margin-bottom: 15px;
 }
 
