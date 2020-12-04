@@ -18,7 +18,7 @@ function getLocalStorage() {
     paintFavorite();
     listenSearch();
   }
-  if (favoriteShows.length === 0) {
+  if (favoriteShows.length === 0 && savedFavorites !== null) {
     favoritesList.innerHTML = '';
     notFavoritesYet();
   }
