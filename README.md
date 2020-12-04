@@ -1,6 +1,6 @@
 ## Evaluación final del módulo 2
 
-![Homepage]()
+![Homepage](https://github.com/evaferrerasbr/modulo-2-evaluacion-final-evaferrerasbr/blob/master/src/images/homepage.jpg)
 
 ## Descripción
 
@@ -17,7 +17,7 @@ src
 ├── js
 │ └── 1.main.js - constantes y variables globales y eventos que afectan a toda la aplicación
 │ └── 2.search.js - renderizado de todos los elementos del array con el resultado de la búsqueda
-│ └── 3.favorites.js - guarda las series favoritas en un nuevo array y renderiza de forma diferente a la seleccionada
+│ └── 3.favorites.js - renderiza las series guardadas como favoritas
 │ └── 4.localstorage.js - almacena las series guardadas como favoritas
 │ └── 5.reset.js - elimina las favoritas y las borra del local storage
 └── scss
