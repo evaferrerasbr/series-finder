@@ -1,7 +1,5 @@
 ## Evaluación final del módulo 2
 
-![Homepage](https://github.com/evaferrerasbr/modulo-2-evaluacion-final-evaferrerasbr/blob/master/src/images/homepage.jpg)
-
 ## Descripción
 
 El ejercicio plantea desarrollar una aplicación web de búsqueda de series con **Javascript**. La aplicación busca en el **API** de [TVMaze](https://www.tvmaze.com/api#show-search) los resultados que coincidan con la búsqueda de la usuaria y permite marcar y desmarcar series como favoritas. Las series guardadas se almacenan en el **local storage**. El desarrollo se ha realizado manipulando el **DOM** de forma avanzada.
